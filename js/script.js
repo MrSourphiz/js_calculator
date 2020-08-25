@@ -21,32 +21,88 @@
   let calcOutput = document.querySelector('.calc__output');
   let calcKeyboard = document.querySelector('.calc__list');
 
+  let checkRemainder = function (numArray) {
+    let digit = [];
+    let result;
+    for (let i = 0; i < numArray.length; i++) {
+      let num = numArray[i];
+      let dotIndex = num.indexOf('.');
+      if (dotIndex === -1) {
+        digit.push(0);
+      } else {
+        let halfString = num.substring(dotIndex + 1, num.length);
+        digit.push(Number(halfString.length));
+      }
+    }
+    result = Math.max(...digit);
+    return result;
+  };
+
   let summation = function (numArray) {
     let result;
+    let outputComputation;
+    let digit = checkRemainder(numArray);
+
     numArray.reduce(function (accumulator, currentValue) {
       result = Number(accumulator) + Number(currentValue);
     });
-    return result;
+    switch (true) {
+      case digit === 0:
+        outputComputation = result;
+        break;
+      case digit > 0:
+        outputComputation = result.toFixed(digit);
+        break;
+    }
+    return outputComputation;
   };
 
   let subtraction = function (numArray) {
     let result;
+    let outputComputation;
+    let digit = checkRemainder(numArray);
+
     numArray.reduce(function (accumulator, currentValue) {
       result = Number(accumulator) - Number(currentValue);
     });
-    return result;
+
+    switch (true) {
+      case digit === 0:
+        outputComputation = result;
+        break;
+      case digit > 0:
+        outputComputation = result.toFixed(digit);
+        break;
+    }
+
+    return outputComputation;
   };
 
   let multiplication = function (numArray) {
     let result;
+    let outputComputation;
+    let digit = checkRemainder(numArray);
+
     numArray.reduce(function (accumulator, currentValue) {
       result = Number(accumulator) * Number(currentValue);
     });
-    return result;
+
+    switch (true) {
+      case digit === 0:
+        outputComputation = result;
+        break;
+      case digit > 0:
+        outputComputation = result.toFixed(digit);
+        break;
+    }
+    return outputComputation;
   };
 
   let division = function (numArray) {
     let result;
+    let outputComputation;
+    let digit = checkRemainder(numArray);
+
     numArray.reduce(function (accumulator, currentValue) {
       if (currentValue === '0') {
         result = 'Деление на 0 невозможно!';
@@ -54,15 +110,36 @@
         result = Number(accumulator) / Number(currentValue);
       }
     });
-    return result;
+
+    switch (true) {
+      case digit === 0:
+        outputComputation = result;
+        break;
+      case digit > 0:
+        outputComputation = result.toFixed(digit);
+        break;
+    }
+    return outputComputation;
   };
 
   let percent = function (numArray) {
     let result;
+    let outputComputation;
+    let digit = checkRemainder(numArray);
+
     numArray.reduce(function (accumulator, currentValue) {
       result = Number(accumulator) % Number(currentValue);
     });
-    return result;
+
+    switch (true) {
+      case digit === 0:
+        outputComputation = result;
+        break;
+      case digit > 0:
+        outputComputation = result.toFixed(digit);
+        break;
+    }
+    return outputComputation;
   };
 
   let convertStringToNum = function (array) {
@@ -179,6 +256,11 @@
   };
 
   getCalcButtons();
+
+  calcInput.addEventListener('keyup', function () {
+    calcInput.value = calcInput.value.replace(/[,]/g, '.');
+    calcInput.value = calcInput.value.replace(/[A-Za-zА-Яа-яЁё]/g, '');
+  });
 
   document.addEventListener('keydown', function (event) {
     switch (true) {
