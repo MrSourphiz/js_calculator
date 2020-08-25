@@ -180,6 +180,11 @@
 
   getCalcButtons();
 
+  calcInput.addEventListener('keyup', function () {
+    calcInput.value = calcInput.value.replace(/[,]/g, '.');
+    calcInput.value = calcInput.value.replace(/[A-Za-zА-Яа-яЁё]/g, '');
+  });
+
   document.addEventListener('keydown', function (event) {
     switch (true) {
       case event.keyCode === ENTER_KEY:
