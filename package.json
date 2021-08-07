@@ -2,7 +2,8 @@
   "name": "js-calculator",
   "version": "1.0.0",
   "private": true,
-  "description": "Простой калькулятор на ванильном JS",
+  "homepage": "https://mrsourphiz.github.io/js_calculator/",
+  "description": "Простой калькулятор на нативном JS",
   "repository": {
     "type": "git",
     "url": "git@github.com:MrSourphiz/js_calculator.git"
@@ -12,7 +13,9 @@
     "eslint-config-htmlacademy": "^0.5.2"
   },
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "gh-pages": "^3.2.3"
+  },
   "scripts": {
     "test": "eslint js/"
   },
